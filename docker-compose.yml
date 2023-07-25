@@ -1,0 +1,23 @@
+services:
+    alternakraft-api:
+        build:
+            context: ./backend
+        networks:
+            - internal
+        ports:
+            - "9090:9090"
+
+    alternakraft-ui:
+        build:
+            context: ./ui
+        networks:
+            - internal
+        depends_on:
+            - alternakraft-api
+        ports:
+            - "3000:3000"
+
+networks:
+    internal:
+        name: alternakraft-network
+        driver: bridge
